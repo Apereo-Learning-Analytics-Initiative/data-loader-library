@@ -170,6 +170,16 @@ public class MatthewsClient {
         .exchange(url, HttpMethod.POST, he, JsonObject.class);
   }
   
+  public void postCourse(unicon.matthews.oneroster.Course course) {
+    HttpEntity<unicon.matthews.oneroster.Course> he = new HttpEntity<unicon.matthews.oneroster.Course>(course, this.httpHeaders);
+    
+    String path = "/api/courses";
+    String url = this.baseUrl + path;
+
+    restTemplate
+        .exchange(url, HttpMethod.POST, he, JsonObject.class);
+  }
+  
   public void postClassMapping(ClassMapping classMapping) {
     HttpEntity<ClassMapping> he = new HttpEntity<ClassMapping>(classMapping, this.httpHeaders);
     
