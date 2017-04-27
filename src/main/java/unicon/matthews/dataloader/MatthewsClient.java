@@ -134,8 +134,17 @@ public class MatthewsClient {
     String path = "/api/users";
     String url = this.baseUrl + path;
 
-    restTemplate
+    ResponseEntity<JsonObject> response =
+      restTemplate
         .exchange(url, HttpMethod.POST, he, JsonObject.class);
+    
+    
+    if (response != null && response.getStatusCode() == HttpStatus.FORBIDDEN) {
+      httpHeaders.add("Authorization", "Bearer "+ getToken());
+      restTemplate
+      .exchange(url, HttpMethod.POST, he, JsonObject.class);      
+    }
+    
   }
   
   public void postUserMapping(UserMapping userMapping) {
