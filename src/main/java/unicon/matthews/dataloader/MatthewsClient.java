@@ -124,8 +124,16 @@ public class MatthewsClient {
     String path = "/api/classes/{classSourcedId}/enrollments";
     String url = this.baseUrl + StringUtils.replace(path, "{classSourcedId}", enrollment.getKlass().getSourcedId());
     
-    restTemplate
-    .exchange(url, HttpMethod.POST, he, JsonObject.class);
+    ResponseEntity<JsonObject> response =
+        restTemplate
+          .exchange(url, HttpMethod.POST, he, JsonObject.class);
+    
+    if (response != null && response.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+      httpHeaders.add("Authorization", "Bearer "+ getToken());
+      restTemplate
+      .exchange(url, HttpMethod.POST, he, JsonObject.class);      
+    }
+
   }
   
   public void postUser(User user) {
@@ -139,7 +147,7 @@ public class MatthewsClient {
         .exchange(url, HttpMethod.POST, he, JsonObject.class);
     
     
-    if (response != null && response.getStatusCode() == HttpStatus.FORBIDDEN) {
+    if (response != null && response.getStatusCode() == HttpStatus.UNAUTHORIZED) {
       httpHeaders.add("Authorization", "Bearer "+ getToken());
       restTemplate
       .exchange(url, HttpMethod.POST, he, JsonObject.class);      
@@ -153,8 +161,15 @@ public class MatthewsClient {
     String path = "/api/users/mapping";
     String url = this.baseUrl + path;
 
-    restTemplate
+    ResponseEntity<JsonObject> response = 
+        restTemplate
         .exchange(url, HttpMethod.POST, he, JsonObject.class);
+
+    if (response != null && response.getStatusCode() == HttpStatus.UNAUTHORIZED) {
+      httpHeaders.add("Authorization", "Bearer "+ getToken());
+      restTemplate
+      .exchange(url, HttpMethod.POST, he, JsonObject.class);      
+    }
 
   }
   
