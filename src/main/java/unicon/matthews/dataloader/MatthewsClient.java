@@ -3,7 +3,7 @@
  */
 package unicon.matthews.dataloader;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,14 +19,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import unicon.matthews.caliper.Envelope;
-import unicon.matthews.caliper.Event;
-import unicon.matthews.entity.ClassMapping;
-import unicon.matthews.entity.DataSync;
-import unicon.matthews.entity.UserMapping;
-import unicon.matthews.oneroster.Enrollment;
-import unicon.matthews.oneroster.LineItem;
-import unicon.matthews.oneroster.User;
+import org.apereo.openlrw.caliper.Envelope;
+import org.apereo.openlrw.caliper.Event;
+import org.apereo.model.entity.ClassMapping;
+import org.apereo.model.entity.DataSync;
+import org.apereo.model.entity.UserMapping;
+import org.apereo.model.oneroster.Enrollment;
+import org.apereo.model.oneroster.LineItem;
+import org.apereo.model.oneroster.User;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
@@ -184,8 +184,8 @@ public class MatthewsClient {
 
   }
  
-  public void postClass(unicon.matthews.oneroster.Class klass) {
-    HttpEntity<unicon.matthews.oneroster.Class> he = new HttpEntity<unicon.matthews.oneroster.Class>(klass, this.httpHeaders);
+  public void postClass(org.apereo.model.oneroster.Class klass) {
+    HttpEntity<org.apereo.model.oneroster.Class> he = new HttpEntity<org.apereo.model.oneroster.Class>(klass, this.httpHeaders);
     
     String path = "/api/classes";
     String url = this.baseUrl + path;
@@ -194,8 +194,8 @@ public class MatthewsClient {
         .exchange(url, HttpMethod.POST, he, JsonObject.class);
   }
   
-  public void postCourse(unicon.matthews.oneroster.Course course) {
-    HttpEntity<unicon.matthews.oneroster.Course> he = new HttpEntity<unicon.matthews.oneroster.Course>(course, this.httpHeaders);
+  public void postCourse(org.apereo.model.oneroster.Course course) {
+    HttpEntity<org.apereo.model.oneroster.Course> he = new HttpEntity<org.apereo.model.oneroster.Course>(course, this.httpHeaders);
     
     String path = "/api/courses";
     String url = this.baseUrl + path;
@@ -219,7 +219,7 @@ public class MatthewsClient {
     Envelope envelope
     = new Envelope.Builder()
       .withData(Collections.singletonList(event))
-      .withSendTime(LocalDateTime.now())
+      .withSendTime(Instant.now())
       .withSensor(sensorName)
       .build();
 
@@ -236,7 +236,7 @@ public class MatthewsClient {
     Envelope envelope
     = new Envelope.Builder()
       .withData(new ArrayList<>(events))
-      .withSendTime(LocalDateTime.now())
+      .withSendTime(Instant.now())
       .withSensor(sensorName)
       .build();
 
@@ -260,7 +260,7 @@ public class MatthewsClient {
 
   }
   
-  public DataSync getLatestDataSyncForType(unicon.matthews.entity.DataSync.DataSyncType dataSyncType) {
+  public DataSync getLatestDataSyncForType(org.apereo.model.entity.DataSync.DataSyncType dataSyncType) {
     DataSync dataSync = null;
     
     String path = "/api/sync/".concat(dataSyncType.toString()).concat("/latest");

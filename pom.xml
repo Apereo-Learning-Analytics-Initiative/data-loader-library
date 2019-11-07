@@ -5,7 +5,7 @@
 
   <groupId>apereo</groupId>
   <artifactId>data-loader-library</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.9</version>
   <packaging>jar</packaging>
 
   <name>apereo-data-loader-library</name>
@@ -46,12 +46,12 @@
     <dependency>
       <groupId>apereo</groupId>
       <artifactId>lai-event</artifactId>
-      <version>1.0.2</version>
+      <version>1.1.4</version>
     </dependency>
     <dependency>
       <groupId>apereo</groupId>
       <artifactId>lai-model</artifactId>
-      <version>1.0.4</version>
+      <version>1.1.1</version>
     </dependency>
     <dependency>
       <groupId>com.google.code.gson</groupId>
@@ -92,4 +92,5 @@
     </plugins>
   </build>
 
+  <description>for use with Apereo LRW_Suite (or Shuhari) products. Mostly used for Data Loading (for the OpenDashboard)</description>
 </project>

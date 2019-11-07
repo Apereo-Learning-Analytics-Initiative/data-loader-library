@@ -1,6 +1,6 @@
 package unicon.matthews.dataloader.converter;
 
-import unicon.matthews.caliper.Event;
+import org.apereo.openlrw.caliper.Event;
 
 /**
  * General interface for type converters. The Type parameters &lt;S, T &gt; will allow the converters to be type safe

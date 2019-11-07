@@ -1,13 +1,13 @@
 package unicon.matthews.dataloader.converter;
 
-import unicon.matthews.caliper.Agent;
-import unicon.matthews.caliper.Entity;
-import unicon.matthews.caliper.Event;
-import unicon.matthews.caliper.Group;
-import unicon.matthews.caliper.Membership;
+import org.apereo.openlrw.caliper.Agent;
+import org.apereo.openlrw.caliper.Entity;
+import org.apereo.openlrw.caliper.Event;
+import org.apereo.openlrw.caliper.Group;
+import org.apereo.openlrw.caliper.Membership;
 import unicon.matthews.dataloader.util.Maps;
-import unicon.matthews.oneroster.Enrollment;
-import unicon.matthews.oneroster.User;
+import org.apereo.model.oneroster.Enrollment;
+import org.apereo.model.oneroster.User;
 
 import java.util.Arrays;
 import java.util.UUID;
@@ -262,7 +262,7 @@ public class EventBuilderUtils {
                 .withType(CaliperV1p1Vocab.Entity.COURSE_SECTION)
                 .withId(enrollment.getKlass().getSourcedId())
                 .withExtensions(Maps.ofEntries(
-                        entry("context_type", enrollment.getKlass().getTitle())));  // TODO - optional and course title is likely wrong - but where do we find something else useful for it
+                        entry("context_type", enrollment.getKlass().getType())));  // TODO - optional and course title is likely wrong - but where do we find something else useful for it
     }
 
     public static Membership.Builder usingMembership(Enrollment enrollment) {
